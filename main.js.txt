@@ -1,0 +1,187 @@
+
+
+
+console.log("Welcome to the Community Portal");
+
+window.onload = function () {
+    alert("Page fully loaded!");
+};
+
+
+const eventName = "Community Picnic";
+const eventDate = "2025-06-20";
+let availableSeats = 100;
+
+function updateSeats() {
+    availableSeats--;
+    console.log(`Seats left for ${eventName}: ${availableSeats}`);
+}
+
+updateSeats(); // Example of seat registration
+
+
+const events = [
+    { name: "Music Concert", date: "2025-06-01", seats: 50, category: "music" },
+    { name: "Local Football Match", date: "2025-05-15", seats: 0, category: "sports" },
+    { name: "Baking Workshop", date: "2025-07-10", seats: 25, category: "workshop" },
+    { name: "Jazz Night", date: "2025-06-05", seats: 30, category: "music" },
+];
+
+function filterUpcomingEvents(events) {
+    const upcomingEvents = events.filter(event => {
+        const currentDate = new Date();
+        const eventDate = new Date(event.date);
+        return eventDate > currentDate && event.seats > 0;
+    });
+    return upcomingEvents;
+}
+
+const validEvents = filterUpcomingEvents(events);
+validEvents.forEach(event => console.log(event.name));
+
+
+function addEvent(name, date, seats, category) {
+    return { name, date, seats, category };
+}
+
+function registerUser(event) {
+    try {
+        if (event.seats > 0) {
+            event.seats--;
+            console.log(`User registered for ${event.name}. Seats left: ${event.seats}`);
+        } else {
+            throw new Error("No seats available!");
+        }
+    } catch (error) {
+        console.log("Registration failed:", error.message);
+    }
+}
+
+function filterEventsByCategory(events, category) {
+    return events.filter(event => event.category === category);
+}
+
+const musicEvents = filterEventsByCategory(events, "music");
+console.log("Music Events:", musicEvents);
+
+function Event(name, date, seats, category) {
+    this.name = name;
+    this.date = date;
+    this.seats = seats;
+    this.category = category;
+}
+
+Event.prototype.checkAvailability = function () {
+    return this.seats > 0 ? "Available" : "Sold Out";
+};
+
+const event1 = new Event("Community Picnic", "2025-06-20", 100, "workshop");
+console.log(event1.checkAvailability());
+console.log(Object.entries(event1));
+
+function renderEvents(events) {
+    const eventList = document.getElementById("eventList");
+    eventList.innerHTML = "";
+    events.forEach(event => {
+        const card = document.createElement("div");
+        card.className = "event-card";
+        card.innerHTML = `
+            <h3>${event.name}</h3>
+            <p>Date: ${event.date}</p>
+            <p>Seats: ${event.seats}</p>
+            <button onclick="registerUser(event)">Register</button>
+        `;
+        eventList.appendChild(card);
+    });
+}
+
+renderEvents(validEvents);
+
+
+document.getElementById("categoryFilter").addEventListener("change", function () {
+    const category = this.value;
+    const filteredEvents = category ? filterEventsByCategory(events, category) : events;
+    renderEvents(filteredEvents);
+});
+
+document.getElementById("searchInput").addEventListener("keydown", function () {
+    const searchTerm = this.value.toLowerCase();
+    const filteredEvents = events.filter(event => event.name.toLowerCase().includes(searchTerm));
+    renderEvents(filteredEvents);
+});
+
+document.getElementById("registerBtn").addEventListener("click", function () {
+    alert("User Registered!");
+});
+
+
+async function fetchEvents() {
+    try {
+        document.getElementById("loading").style.display = "block";
+        const response = await fetch("https://api.mock.com/events");
+        const data = await response.json();
+        renderEvents(data);
+    } catch (error) {
+        console.log("Error fetching events:", error);
+    } finally {
+        document.getElementById("loading").style.display = "none";
+    }
+}
+
+fetchEvents();
+
+
+const event = { name: "Music Concert", date: "2025-06-01", seats: 50, category: "music" };
+const { name, date } = event;
+console.log(name, date);
+
+// Using the spread operator to clone and filter events
+const eventsClone = [...events];
+const upcomingMusicEvents = eventsClone.filter(event => event.category === "music");
+console.log(upcomingMusicEvents);
+
+
+const registrationForm = document.getElementById("registrationForm");
+
+registrationForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const selectedEvent = event.target.selectedEvent.value;
+    
+    if (name && email && selectedEvent) {
+        console.log(`Registered ${name} for ${selectedEvent}`);
+    } else {
+        console.log("Please fill in all fields.");
+    }
+});
+
+
+async function postRegistration(userData) {
+    try {
+        const response = await fetch("https://api.mock.com/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        });
+        const data = await response.json();
+        alert("Registration Successful!");
+    } catch (error) {
+        alert("Registration failed!");
+    }
+}
+
+setTimeout(() => postRegistration({ name: "John Doe", event: "Music Concert" }), 2000);
+
+
+// Use the console, breakpoints, and the network tab for debugging registration flow
+
+
+// This is a simplified example of jQuery use in your project.
+$(document).ready(function () {
+    $('#registerBtn').click(function () {
+        $(this).fadeOut(500).fadeIn(500);
+    });
+});

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Community Event Portal</title>
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    nav {
+      background-color: #007BFF;
+      padding: 10px;
+    }
+
+    nav a {
+      color: white;
+      margin-right: 15px;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+
+    #welcomeBanner {
+      background-color: #004085;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+  
+    .specialOffer {
+      color: red;
+      font-weight: bold;
+    }
+
+
+    form {
+      padding: 20px;
+      background-color: white;
+      margin: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    table img {
+      width: 100px;
+      height: 100px;
+      border: 2px solid #007BFF;
+    }
+
+    table caption {
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+
+    #feedback {
+      margin-top: 20px;
+    }
+
+ 
+    @media screen and (max-width: 768px) {
+      nav {
+        text-align: center;
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      #welcomeBanner {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Section -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#contact">Contact</a>
+    <a href="help.html" target="_blank">Help</a>
+  </nav>
+
+  <!-- Welcome Message Section -->
+  <div id="welcomeBanner">
+    <h1>Welcome to the Local Community Event Portal</h1>
+    <p>We have great events for you to join! <span class="specialOffer">Special Offer: Sign up for 3 events, get one free!</span></p>
+  </div>
+
+  <!-- Events Section -->
+  <section id="events">
+    <h2>Past Events</h2>
+
+    <!-- Image Gallery -->
+    <table>
+      <caption>Gallery of Past Community Events</caption>
+      <tr>
+        <td><img src="event1.jpg" alt="Community Clean-up" title="Community Clean-up"></td>
+        <td><img src="event2.jpg" alt="Charity Run" title="Charity Run"></td>
+        <td><img src="event3.jpg" alt="Volunteer Meet" title="Volunteer Meet"></td>
+      </tr>
+      <tr>
+        <td>Community Clean-up</td>
+        <td>Charity Run</td>
+        <td>Volunteer Meet</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Event Registration Form -->
+  <section id="registration">
+    <h2>Register for Events</h2>
+    <form id="eventForm">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Your Name" required autofocus>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-group">
+        <label for="eventDate">Event Date</label>
+        <input type="date" id="eventDate" required>
+      </div>
+      <div class="form-group">
+        <label for="eventType">Event Type</label>
+        <select id="eventType" required onchange="updateFee()">
+          <option value="free">Free</option>
+          <option value="paid">Paid</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Additional comments..." rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit">Submit Registration</button>
+      </div>
+      <output id="confirmationMessage"></output>
+    </form>
+  </section>
+
+  <!-- Feedback Section -->
+  <section id="feedback">
+    <h2>Event Feedback</h2>
+    <textarea id="feedbackText" placeholder="Leave your feedback here..." oninput="countCharacters()"></textarea>
+    <p>Character count: <span id="charCount">0</span></p>
+  </section>
+
+  <!-- Video Invite Section -->
+  <section id="videoInvite">
+    <h2>Watch Our Event Promo</h2>
+    <video id="promoVideo" width="320" height="240" controls oncanplay="videoReady()">
+      <source src="event-promo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <p id="videoMessage"></p>
+  </section>
+
+  <!-- Geolocation Button -->
+  <section id="geolocation">
+    <h2>Find Nearby Events</h2>
+    <button onclick="findLocation()">Find Events Near Me</button>
+    <p id="locationMessage"></p>
+  </section>
+
+  <!-- JavaScript for form handling, feedback, video, and geolocation -->
+  <script>
+    // Event Registration Form
+    document.getElementById("eventForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      document.getElementById("confirmationMessage").textContent = "Thank you for registering!";
+    });
+
+    // Feedback Section - Character Count
+    function countCharacters() {
+      const feedbackText = document.getElementById("feedbackText").value;
+      document.getElementById("charCount").textContent = feedbackText.length;
+    }
+
+    // Video Invite - On Video Ready
+    function videoReady() {
+      document.getElementById("videoMessage").textContent = "Video is ready to play!";
+    }
+
+    // Geolocation - Find Nearby Events
+    function findLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(displayLocation, showError, {
+          enableHighAccuracy: true
+        });
+      } else {
+        document.getElementById("locationMessage").textContent = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function displayLocation(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      document.getElementById("locationMessage").textContent = `Your location: Latitude ${lat}, Longitude ${lon}`;
+    }
+
+    function showError(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          document.getElementById("locationMessage").textContent = "User denied the request for Geolocation.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          document.getElementById("locationMessage").textContent = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          document.getElementById("locationMessage").textContent = "The request to get user location timed out.";
+          break;
+        case error.UNKNOWN_ERROR:
+          document.getElementById("locationMessage").textContent = "An unknown error occurred.";
+          break;
+      }
+    }
+
+    // Update Event Fee on Dropdown Change
+    function updateFee() {
+      const eventType = document.getElementById("eventType").value;
+      alert("Event fee: " + (eventType === "paid" ? "$10" : "Free"));
+    }
+
+    // Warn before leaving the page if the form is unfinished
+    window.onbeforeunload = function() {
+      if (document.getElementById("eventForm").checkValidity()) {
+        return null;
+      } else {
+        return "You have unsaved changes!";
+      }
+    };
+  </script>
+</body>
+</html>

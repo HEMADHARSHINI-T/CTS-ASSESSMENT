@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local Community Event Portal</title>
+
+  
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Inline Style for Red Heading */
+    h1 {
+      color: red; /* This heading will be red */
+    }
+
+
+    body {
+      background-color: #f4f4f4; /* Light gray background */
+      font-family: Arial, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .eventCard {
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 15px 0;
+    }
+
+ 
+    .cta-button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+
+    table, th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+      border-collapse: collapse;
+    }
+
+
+    .news {
+      column-count: 2;
+      column-gap: 30px;
+      column-rule: 1px solid gray;
+    }
+
+   
+    nav ul {
+      list-style-type: none;
+    }
+
+    nav ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .nav-link:link {
+      color: #007BFF;
+    }
+
+    .nav-link:visited {
+      color: #0056b3;
+    }
+
+    .nav-link:hover {
+      color: #004085;
+      text-decoration: underline;
+    }
+
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: block; /* Stack navigation links vertically */
+      }
+
+      .eventCard {
+        margin: 10px 0; /* Adjust margins for mobile view */
+      }
+
+      .cta-button {
+        font-size: 14px; /* Reduce button text size */
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Main Header -->
+  <h1 id="mainHeader">Welcome to the Local Community Event Portal</h1>
+
+  <!-- Event Cards Section -->
+  <div class="eventCard">
+    <h2>Event 1: Community Clean-Up</h2>
+    <p>Join us for a community clean-up event this weekend.</p>
+  </div>
+
+  <div class="eventCard">
+    <h2>Event 2: Charity Run</h2>
+    <p>Help raise funds for local charities by participating in a charity run.</p>
+  </div>
+
+  <!-- Table for Event Details -->
+  <table>
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Community Clean-Up</td>
+        <td>Saturday, June 5</td>
+        <td>Local Park</td>
+      </tr>
+      <tr>
+        <td>Charity Run</td>
+        <td>Sunday, June 6</td>
+        <td>Downtown</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- News Section with Multi-column Layout -->
+  <section class="news">
+    <h3>Community News</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vulputate massa et ligula volutpat, a vehicula metus sollicitudin. Integer et interdum elit, nec luctus arcu.</p>
+    <p>Proin suscipit, tortor in bibendum malesuada, justo sem gravida sapien, sed malesuada arcu urna nec magna. Nulla facilisi. Suspendisse potenti. Fusce a posuere arcu. Donec sed erat odio.</p>
+  </section>
+
+  <!-- Links Section -->
+  <nav>
+    <ul>
+      <li><a href="#" class="nav-link">Home</a></li>
+      <li><a href="#" class="nav-link">Events</a></li>
+      <li><a href="#" class="nav-link">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Contact Form Section -->
+  <form>
+    <div class="form-group">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" class="form-control">
+    </div>
+    <button type="submit" class="cta-button">Submit</button>
+  </form>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Local Community Portal</p>
+  </footer>
+
+  <!-- External JS Link (Bootstrap for Modal or Other JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
