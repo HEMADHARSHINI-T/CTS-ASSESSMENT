@@ -16,7 +16,7 @@
 
 
     body {
-      background-color: #f4f4f4; /* Light gray background */
+      background-color: #f4f4f4; 
       font-family: Arial, sans-serif;
     }
 
@@ -82,15 +82,15 @@
 
     @media (max-width: 768px) {
       nav ul {
-        display: block; /* Stack navigation links vertically */
+        display: block; 
       }
 
       .eventCard {
-        margin: 10px 0; /* Adjust margins for mobile view */
+        margin: 10px 0;
       }
 
       .cta-button {
-        font-size: 14px; /* Reduce button text size */
+        font-size: 14px;
       }
     }
 
