@@ -17,7 +17,7 @@ function updateSeats() {
     console.log(`Seats left for ${eventName}: ${availableSeats}`);
 }
 
-updateSeats(); // Example of seat registration
+updateSeats(); 
 
 
 const events = [
@@ -176,10 +176,8 @@ async function postRegistration(userData) {
 setTimeout(() => postRegistration({ name: "John Doe", event: "Music Concert" }), 2000);
 
 
-// Use the console, breakpoints, and the network tab for debugging registration flow
 
 
-// This is a simplified example of jQuery use in your project.
 $(document).ready(function () {
     $('#registerBtn').click(function () {
         $(this).fadeOut(500).fadeIn(500);
