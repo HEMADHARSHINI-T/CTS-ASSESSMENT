@@ -206,24 +206,24 @@
 
   <!-- JavaScript for form handling, feedback, video, and geolocation -->
   <script>
-    // Event Registration Form
+ 
     document.getElementById("eventForm").addEventListener("submit", function(event) {
       event.preventDefault();
       document.getElementById("confirmationMessage").textContent = "Thank you for registering!";
     });
 
-    // Feedback Section - Character Count
+   
     function countCharacters() {
       const feedbackText = document.getElementById("feedbackText").value;
       document.getElementById("charCount").textContent = feedbackText.length;
     }
 
-    // Video Invite - On Video Ready
+   
     function videoReady() {
       document.getElementById("videoMessage").textContent = "Video is ready to play!";
     }
 
-    // Geolocation - Find Nearby Events
+
     function findLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(displayLocation, showError, {
@@ -257,13 +257,12 @@
       }
     }
 
-    // Update Event Fee on Dropdown Change
     function updateFee() {
       const eventType = document.getElementById("eventType").value;
       alert("Event fee: " + (eventType === "paid" ? "$10" : "Free"));
     }
 
-    // Warn before leaving the page if the form is unfinished
+
     window.onbeforeunload = function() {
       if (document.getElementById("eventForm").checkValidity()) {
         return null;
